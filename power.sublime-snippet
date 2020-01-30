@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+int power(int x, unsigned int y, unsigned int m)
+{
+    if (y == 0)
+        return 1;
+    int p = power(x, y/2, m) % m;
+    p = (p * p) % m;
+    return (y%2 == 0)? p : (x * p) % m;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	 <tabTrigger>power</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

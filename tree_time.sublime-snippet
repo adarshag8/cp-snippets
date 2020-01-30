@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[
+int tin[N], tout[N];
+int timer = 0;
+void dfs(int u, int p){
+	tin[u] = ++timer;
+	for(auto v:g[u]){
+		if(v!=p)
+			dfs(v,u);
+	}
+	tout[u] = ++timer;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	 <tabTrigger>tree_time</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

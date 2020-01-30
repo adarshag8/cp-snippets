@@ -1,0 +1,50 @@
+<snippet>
+	<content><![CDATA[
+int dfs(int u){
+	int size = 1;
+	int mx = 0;
+	for(auto v:g[u]){
+		if(v!=parent[u]){
+			parent[v] = u;
+			depth[v] = depth[u]+1;
+			int c_size = dfs(v);
+			size += c_size;
+			if(c_size>mx){
+				mx = c_size;
+				heavy[u] = v;
+			}
+		}
+	}
+	return size;
+}
+
+void decompose(int u, int hd){
+	head[u] = hd;
+	id[u] = cur_pos++;
+	if(heavy[u])
+		decompose(heavy[u],hd);
+	for(auto v:g[u])
+		if(v!=parent[u] && v!=heavy[u])
+			decompose(v,v);
+}
+
+int query(int a,int b){
+	int res = 0;
+	for(;head[a]!=head[b];b=parent[head[b]]){
+		if(depth[head[a]] >depth[head[b]])
+			swap(a,b);
+		int cur = segtree_query(id[head[b]],id[b]);
+		res = max(res, cur);
+	}
+	if(depth[a]>depth[b])
+		swap(a,b);
+	int last = segtree_query(id[a],id[b]);
+	res = max(res, last);
+	return res;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>hld</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

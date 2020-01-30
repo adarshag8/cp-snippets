@@ -1,0 +1,28 @@
+<snippet>
+	<content><![CDATA[
+int upper(vector<int> a, int i)
+{
+    int lo=0, hi=sz(a)-1;
+    while(lo<=hi)
+    {
+        int mid = (lo+hi)/2;
+        if(a[mid]>=i)
+        {
+            hi = mid-1;
+            continue;
+        }
+        if(a[mid]<i)
+        {
+            lo = mid+1;
+            continue;
+        }
+    }
+    return a[hi+1];
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	 <tabTrigger>upper</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
+	

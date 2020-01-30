@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[
+int size[N];
+int dfsSize(int u, int p){
+	int s = 1;
+	for(auto v:g[u]){
+		if(v!=p){
+			s += dfsSize(v,u);
+		}
+	}
+	return size[u] = s;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>subtree_size</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

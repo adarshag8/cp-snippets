@@ -1,0 +1,27 @@
+<snippet>
+	<content><![CDATA[
+int lazy[4*N];
+int update(int v, int l, int r, int tl, int tr, int val){
+    if(l>r) return 0;
+    if(l == tl && r == tr){
+        lazy[v] += val;
+        return 0;
+    }
+    int mid = (tl+tr)>>1;
+    update(v<<1, l, min(r,mid), tl, mid, val);
+    update(v<<1|1, max(l,mid), r, mid+1, tr, val);
+}
+int query(int v, int l, int r, int tl, int tr){
+    if(l == tl && r == tr){
+        return lazy[v] + a[v];
+    }
+    if(r<tl || l>tr) return 0;
+    int mid = (tl+tr)>>1;
+    return query(v<<1, l, min(r,mid), tl, mid) + query(v<<1|1, max(mid,r), r, mid+1, tr);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>lazy</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

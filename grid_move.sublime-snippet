@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+const int fx[] = {1,0,-1,0};
+const int fy[] = {0,1,0,-1};
+const char cxy[] = {'D','R','U','L'};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>grid_move</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

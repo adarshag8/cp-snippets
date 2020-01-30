@@ -1,0 +1,26 @@
+<snippet>
+	<content><![CDATA[
+int bfs(int x)
+{
+	int par = -1;
+	vis[x] = true;
+	q.push(x);
+	while (!q.empty()) 
+	{
+		int s = q.front(); 
+		q.pop();
+		for (auto u : g[s])
+		{
+			if (vis[u]||u==par) continue;
+			vis[u] = true;
+			q.push(u);
+		}
+		par = s;
+	}
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>bfs</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

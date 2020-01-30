@@ -1,0 +1,68 @@
+<snippet>
+	<content><![CDATA[
+struct node{
+    node* left,*right;
+    ll sum;
+    void assign(ll val)
+    {
+        sum=val;
+    }
+    void merge(node *l,node *r)
+    {
+        sum=0;
+        if(l!=NULL)
+            sum+=l->sum;
+        if(r!=NULL)
+            sum+=r->sum;
+    }
+};
+node* create()
+{
+	node *tmp=new node;
+	tmp->sum=0;
+	tmp->left=NULL;
+	tmp->right=NULL;
+	return tmp;
+}
+class dynamicsegtree{
+    node *root;
+public:
+    dynamicsegtree()
+    {
+        root=create();
+    }
+    ll query(node *x,int tl,int tr,int l,int r)
+    {
+        if(l>tr||r<tl||x==NULL)
+            return 0ll;
+        if(l<=tl&&tr<=r)
+            return x->sum;
+        int tm=tl+(tr-tl)/2;
+        return query(x->left,tl,tm,l,r)+query(x->right,tm+1,tr,l,r);
+    }
+    void update(node *x,int tl,int tr,int pos,int val)
+    {
+        if(pos>tr||pos<tl)
+            return ;
+        if(tl==tr)
+        {
+            x->assign(val);
+            return ;
+        }
+        int tm=tl + (tr-tl)/2;
+        if(x->left==NULL&&pos<=tm)
+            x->left=create();
+        if(x->right==NULL&&pos>tm)
+        	x->right=create();
+        update(x->left,tl,tm,pos,val);
+        update(x->right,tm+1,tr,pos,val);
+        x->merge(x->left,x->right);
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<!-- <tabTrigger>hello</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+	<tabTrigger>dynamic_segment_tree</tabTrigger>
+</snippet>

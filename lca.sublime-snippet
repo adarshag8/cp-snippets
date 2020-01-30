@@ -1,0 +1,39 @@
+<snippet>
+	<content><![CDATA[
+int tin[N], tout[N];
+int up[N][21];
+int timer = 0;
+void dfs(int u, int p){
+	tin[u] = ++timer;
+	up[u][0] = p;
+	rep(i,1,21){
+		up[u][i] = up[up[u][i-1]][i-1];
+	}
+	for(auto v:g[u]){
+		if(v!=p)
+			dfs(v,u);
+	}
+	tout[u] = ++timer;
+}
+bool is_ancestor(int par, int child){
+	if(par == 0) return true;
+	if(child == 0) return false;
+	if(tin[par]<=tin[child] and tout[par]>=tout[child]) return true;
+	return false;
+}
+int lca(int u, int v){
+	if(is_ancestor(u,v)) return u;
+	if(is_ancestor(v,u)) return v;
+	for(int i=20; i>=0; i--){
+		if(!is_ancestor(up[u][i],v))
+			u = up[u][i];
+	}
+	return up[u][0];
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>lca</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

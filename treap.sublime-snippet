@@ -1,0 +1,117 @@
+<snippet>
+	<content><![CDATA[
+struct node{
+    node* l;
+    node* r;
+    int key;
+    int prior;
+    int size;
+    ll val;
+    ll max;
+};
+node* create(ll int val,int pos)
+{
+    node* x=new node;
+    x->key=pos;
+    x->l=NULL;
+    x->r=NULL;
+    x->prior=rng();
+    x->size=1;
+    x->val=val;
+    x->max=val;
+    return x;
+}
+int SZ(node* x)
+{
+    return x?x->size:0;
+}
+void upd_SZ(node* x)
+{
+    if(x) x->size=SZ(x->l)+SZ(x->r)+1;
+}
+void reset(node* x)
+{
+    if(x) x->max=x->val;
+}
+void combine(node* &t,node* l,node* r)
+{
+    if(!l)t->max=r->max;
+    else if(!r)t->max=l->max;
+    else t->max=max(l->max,r->max);
+}
+void operation(node* &t)
+{
+    if(!t)return;
+    reset(t);
+    combine(t,t->l,t);
+    combine(t,t,t->r);
+}
+void printtreap(node* t)
+{
+    if(!t)return;
+    printtreap(t->l);
+    cout<<t->val<<" ";
+    printtreap(t->r);
+}
+void split(node* t,node* &left,node* &right,int key,int add=0) {
+    if(!t) { left=right=NULL; return;}
+    int curpos= add + SZ(t->l);
+    if(curpos<=key)split(t->r,t->r,right,key,curpos +1) ,left=t;
+    else split(t->l,left,t->l,key,add), right=t;
+    upd_SZ(t);
+    operation(t);
+}
+void merge(node* &t,node* l,node* r)
+{
+    if(!l)t=r;
+    else if(!r)t=l;
+    else if(l->prior > r->prior) merge(l->r,l->r,r), t=l;
+    else merge(r->l,l,r->l), t=r;
+    upd_SZ(t);
+    operation(t);
+}
+void insert(node* &t,int x,ll y)
+{
+    node* tmp=create(y,x);
+    node* lll;
+    node* rrr;
+    node* kutta;
+    split(t,lll,rrr,x-1);
+    merge(kutta,lll,tmp);
+    merge(t,kutta,rrr);
+}
+void erase(node* &t,int pos)
+{
+	node* tmp;
+	node* lll;
+	node* rrr;
+	node* kutta;
+	split(t,lll,kutta,pos-1);
+	split(kutta,tmp,rrr,0);
+	merge(t,lll,rrr);
+	delete(tmp);
+}
+int findkey(node* t,int val)
+{
+    if(!t)return 0;
+    if(t->val==val)return SZ(t->l);
+    if(t->val>val)return findkey(t->l,val);
+    else return SZ(t->l)+1+findkey(t->r,val);
+}
+ll query(node* &t,int l,int r)
+{
+    if(!t)return 0;
+    node *le,*ri,*mid;
+    split(t,le,mid,l-1);
+    split(mid,mid,ri,r-l);
+    ll ans=mid->max;
+    merge(mid,mid,ri);
+    merge(t,le,mid);
+    return ans;
+}	
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	 <tabTrigger>treap</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

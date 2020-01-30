@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+#define gc getchar_unlocked
+inline void read(int &x)
+{
+   char ch;bool f=0;int a=0;
+   while(!((((ch=getchar())>='0')&&(ch<='9'))||(ch=='-')));
+   if(ch!='-')a*=10,a+=ch-'0';else f=1;
+   while(((ch=getchar())>='0')&&(ch<='9'))a*=10,a+=ch-'0';
+   if(f)a=-a;x=a;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	 <tabTrigger>fast i/o</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

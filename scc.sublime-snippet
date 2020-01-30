@@ -1,0 +1,27 @@
+<snippet>
+	<content><![CDATA[
+vector <int> g[N], gr[N];
+vector<bool> used(N);
+vector<int> order, component;
+
+void dfs1 (int v) {
+    used[v] = true;
+    for (size_t i=0; i<g[v].size(); ++i)
+        if (!used[ g[v][i] ])
+            dfs1 (g[v][i]);
+    order.push_back (v);
+}
+
+void dfs2 (int v) {
+    used[v] = true;
+    component.push_back (v);
+    for (size_t i=0; i<gr[v].size(); ++i)
+        if (!used[ gr[v][i] ])
+            dfs2 (gr[v][i]);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	 <tabTrigger>scc</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
