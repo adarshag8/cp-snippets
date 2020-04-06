@@ -1,0 +1,29 @@
+<snippet>
+	<content><![CDATA[
+int countDivisors(int n){
+	if(n==1) return 1;
+	int tn = n;
+	int ans = 1;
+	int x = 1;
+	rep(i,0,sz(p)){
+		if(p[i]*p[i]*p[i]>n) break;
+		int cnt = 1;
+		while(n%p[i]==0){
+			n /= p[i];
+			cnt++;
+			x *= p[i];
+		}
+		ans = ans*cnt;
+	}
+	int y = tn / x;
+	if(prime[y]) return ans * 2;
+	if(prime[(int)sqrt(y)] and sqrt(y)==(int)sqrt(y)) return ans * 3;
+	if(y!=1) return ans * 4;
+	return ans;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>count_divisors</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

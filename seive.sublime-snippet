@@ -1,6 +1,7 @@
 <snippet>
 	<content><![CDATA[
 bool prime[N];
+vector <int> p;
 void seive() 
 {
 	memset(prime, true, sizeof(prime)); 
@@ -13,6 +14,9 @@ void seive()
 				prime[i] = false; 
 		} 
 	} 
+	for (int i=2; i<=N; i++)
+		if (prime[i] == true)
+			p.pb(i);
 } 
 
 

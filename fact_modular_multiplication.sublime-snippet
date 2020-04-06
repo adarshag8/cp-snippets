@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[
+int mul(int a, int b, int md) {
+  unsigned long long x = (long long) a * b;
+  unsigned xh = (unsigned) (x >> 32), xl = (unsigned) x, d, m;
+  asm(
+    "divl %4; \n\t"
+    : "=a" (d), "=d" (m)
+    : "d" (xh), "a" (xl), "r" (md)
+  );
+  return m;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>fast_modular_multiplication</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

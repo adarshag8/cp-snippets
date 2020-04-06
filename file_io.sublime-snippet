@@ -1,16 +1,10 @@
 <snippet>
 	<content><![CDATA[
-int marked[4*N];
-void pushdown(int v){
-	if(marked[v]){
-		lazy[v<<1] = lazy[v<<1|1] = lazy[v];
-		marked[v<<1] = marked[v<<1|1] = true;
-		marked[v] = false;
-	}
-}
+freopen("input.txt", "r+", stdin);
+freopen("output.txt", "w+", stdout);
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
- <tabTrigger>pushdown</tabTrigger> -->
+	<tabTrigger>file io</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<!-- <scope>source.python</scope> -->
 </snippet>

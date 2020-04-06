@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+double area(vector<pair<int,int>> fig) {
+    double res = 0;
+    for (unsigned i = 0; i < fig.size(); i++) {
+        pair<int,int> p = i ? fig[i - 1] : fig.back();
+        pair<int,int> q = fig[i];
+        res += (p.first - q.first) * (p.second + q.second);
+    }
+    return fabs(res) / 2;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>area_of_polygon</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

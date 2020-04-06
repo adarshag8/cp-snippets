@@ -1,0 +1,33 @@
+<snippet>
+	<content><![CDATA[
+int table[N][20];
+int logn[N];
+int merge(int a, int b){
+    return min(a,b);
+}
+
+void perprocess(vector<int> a){
+    logn[1] = 0;
+    for(int i=2; i<N; i++)
+        logn[i] = logn[i/2]+1;
+    for(int i=0; i<a.size(); i++){
+        table[i][0] = a[i];
+    }
+    int k = logn[a.size()];
+    for(int j=1; j<=k; j++){
+        for(int i=0; i<a.size(); i++){
+            table[i][j] = merge(table[i][j-1],table[i+(1<<(j-1))][j-1]);
+        }
+    }
+}
+
+int query(int l, int r){   // 0 based indexing
+    int j = logn[r-l+1];
+    return merge(table[l][j], table[r-(1<<j)+1][j]);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>sparse_table</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

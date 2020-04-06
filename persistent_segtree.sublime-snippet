@@ -1,0 +1,27 @@
+<snippet>
+	<content><![CDATA[
+struct node{
+	int count;
+	node* left, right;
+
+	node(int count, node* left, node* right)
+		count(count), left(left), right(right) {}
+	node* insert(int l, int r, int w);
+} *null;
+null = new node(0, NULL, NULL);
+node * node::insert(int l, int r, int w){
+	if(l<=w and w<=r){
+		if(l==r){
+			return new node(this->count+1, null, null);
+		}
+		int m = (l+r)/2;
+		return new node(this->node+1, this->left->insert(l,m,w), this->right->insert(m+1,r,w));
+	}
+	return this;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>persistent segtree</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

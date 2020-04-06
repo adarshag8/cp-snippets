@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+while(float(clock() - begin_time) / CLOCKS_PER_SEC < 1.00)
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>time_operation</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
