@@ -13,6 +13,13 @@ vector<int> prefix_function(string s) {
     }
     return pi;
 }
+/*
+pi[i] denotes the maximum length of string[0..i] having common prefix and suffix
+1. KMP (Find substring)
+2. Counting the number of occurrences of each prefix
+3. The number of different substring in a string
+4. Compressing a string
+*/
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>prefix_function</tabTrigger>

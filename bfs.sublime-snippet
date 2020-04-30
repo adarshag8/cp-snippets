@@ -1,21 +1,24 @@
 <snippet>
 	<content><![CDATA[
-int bfs(int x)
+vector<bool> used(N,0);
+vector<int> d(N), p(N,-1);
+int bfs(int s)
 {
-	int par = -1;
-	vis[x] = true;
-	q.push(x);
-	while (!q.empty()) 
-	{
-		int s = q.front(); 
-		q.pop();
-		for (auto u : g[s])
-		{
-			if (vis[u]||u==par) continue;
-			vis[u] = true;
-			q.push(u);
-		}
-		par = s;
+	queue<int> q;
+	q.push(s);
+	used[s] = true;
+	p[s] = -1;
+	while (!q.empty()) {
+	    int v = q.front();
+	    q.pop();
+	    for (int u : g[v]) {
+	        if (!used[u]) {
+	            used[u] = true;
+	            q.push(u);
+	            d[u] = d[v] + 1;
+	            p[u] = v;
+	        }
+	    }
 	}
 }
 ]]></content>

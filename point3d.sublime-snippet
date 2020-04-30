@@ -1,0 +1,62 @@
+<snippet>
+	<content><![CDATA[
+#define ftype int
+struct point3d {
+    ftype x, y, z;
+    point3d() {}
+    point3d(ftype x, ftype y, ftype z): x(x), y(y), z(z) {}
+    point3d& operator+=(const point3d &t) {
+        x += t.x;
+        y += t.y;
+        z += t.z;
+        return *this;
+    }
+    point3d& operator-=(const point3d &t) {
+        x -= t.x;
+        y -= t.y;
+        z -= t.z;
+        return *this;
+    }
+    point3d& operator*=(ftype t) {
+        x *= t;
+        y *= t;
+        z *= t;
+        return *this;
+    }
+    point3d& operator/=(ftype t) {
+        x /= t;
+        y /= t;
+        z /= t;
+        return *this;
+    }
+    point3d operator+(const point3d &t) const {
+        return point3d(*this) += t;
+    }
+    point3d operator-(const point3d &t) const {
+        return point3d(*this) -= t;
+    }
+    point3d operator*(ftype t) const {
+        return point3d(*this) *= t;
+    }
+    point3d operator/(ftype t) const {
+        return point3d(*this) /= t;
+    }
+    ftype operator*(const point3d &t) const{
+    	return x * t.x + y * t.y + z * t.z;
+    }
+    double abs(){
+    	return sqrt((*this) * (*this));
+    }
+};
+double proj(point3d a, point3d b) {           // Projection of a into b
+    return (a * b) / b.abs();
+}
+double angle(point3d a, point3d b) {
+    return acos((a * b) / a.abs() / b.abs());
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>point3d</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

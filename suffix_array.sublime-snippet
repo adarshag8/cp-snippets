@@ -1,0 +1,58 @@
+<snippet>
+	<content><![CDATA[
+struct node{
+	int sortindex[2];
+	int index;
+};
+int n, step;
+map<int,int> smap;
+vector<int> p;
+vector<vector<int>> c(20);
+bool cmp(node& lhs, node& rhs){
+	if(lhs.sortindex[0] != rhs.sortindex[0])
+		return lhs.sortindex[0] <  rhs.sortindex[0];
+	return (lhs.sortindex[1] < rhs.sortindex[1]);
+}
+void suffix(string s){
+	n = s.size();
+	p.resize(n);
+	for(int i = 0; i < 20; i++)
+		c[i].resize(n);
+	node sa[n];
+	for(int i = 0; i < n; i++)
+		c[0][i] = s[i] - 'a';
+	for(step = 0; 1<<(step-1) < n; step++){
+		int count = 1<<step;
+		for(int i=0; i<n; i++){
+			sa[i].sortindex[0] = c[step][i];
+			sa[i].sortindex[1] = i+count < n ? c[step][i+count] : -1;
+			sa[i].index = i;
+		}
+		sort(sa, sa+n, cmp);
+		for(int i=0; i<n; i++){
+			c[step+1][sa[i].index] = (i>0 && sa[i-1].sortindex[0]==sa[i].sortindex[0] && sa[i-1].sortindex[1]==sa[i].sortindex[1]) ? c[step+1][sa[i-1].index] : i;
+		}
+	}
+	for (int i = 0; i<n; i++) {
+		smap[c[step][i]]=i;
+	}
+	int j = 0;
+	for(auto& i:smap){
+	  p[j++] = i.second;
+	}
+}
+/*
+p[i] denotes the the starting index of ith rank suffix
+c[i][j] denotes the class of substring [j,j+2^i)
+Applications:
+1. Finding the smallest cyclic shift index (Answer: p[0])
+2. Finding a substring in a string (Hint: Binary Search on p[])
+3. Comparing two substrings of string s (>,<,=)
+4. Longest Common Prefix of two substrings (LCA type approach)
+*/
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>suffix_array</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
