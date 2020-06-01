@@ -1,0 +1,71 @@
+<snippet>
+	<content><![CDATA[
+/* Debug Linked List */
+struct ListNode{
+	int val;
+	ListNode *next;
+	ListNode(int x) : val(x), next(NULL) {};
+};
+
+ListNode* insert(ListNode* root, int x){
+	if(root == NULL){
+		return new ListNode(x);
+	}
+	ListNode* cur = root;
+	while(cur->next) cur = cur->next;
+	cur->next = new ListNode(x);
+	return root;
+}
+
+void eraseByValue(ListNode* root, int x){
+	ListNode* cur = root, *prev = NULL;
+	while(cur){
+		if(cur->val == x){
+			if(prev != NULL) prev->next = cur->next;
+			else root = cur->next;
+			cur->next = NULL;
+			delete cur;
+			return;
+		}
+		prev = cur;
+		cur = cur->next;
+	}
+}
+
+void eraseByIndex(ListNode* root, int k){
+	ListNode* cur = root, *prev = NULL;
+	while(cur){
+		if(k == 0){
+			if(prev != NULL) prev->next = cur->next;
+			else root = cur->next;
+			cur->next = NULL;
+			delete cur;
+			return;
+		}
+		k--;
+		prev = cur;
+		cur = cur->next;
+	}
+}
+void print(ListNode* root){
+	ListNode* cur = root;
+	while(cur){
+		cerr << cur->val << " ";
+		cur = cur->next;
+	}
+	cerr << endl;
+}
+
+ListNode* build(ListNode* root, vector<int> v){
+	for(auto i:v) root = insert(root, i);
+	return root;
+}
+
+/* Debug Ends */ 
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>debug_list</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

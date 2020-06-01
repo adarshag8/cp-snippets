@@ -1,0 +1,54 @@
+<snippet>
+	<content><![CDATA[
+// Use C++17 (erasing from set on the go is invalid)
+struct CentroidDecomposition {
+	vector<set<int>> tree; // it's not vector<vector<int>>!
+	vector<int> dad;
+	vector<int> sub;
+
+	CentroidDecomposition(vector<set<int>> &tree) : tree(tree) {
+		int n = tree.size();
+		dad.resize(n+1);
+		sub.resize(n+1);
+		build(1, -1);
+	}
+
+	void build(int u, int p) {
+		int n = dfs(u, p); // find the size of each subtree
+		int centroid = dfs(u, p, n); // find the centroid
+		dad[centroid] = p;
+		// for each tree resulting from the removal of the centroid
+		for(auto it = tree[centroid].begin(); it != tree[centroid].end();){
+			int v = *it;
+			tree[v].erase(centroid);
+			it = tree[centroid].erase(it);
+			build(v, centroid);
+		}
+	}
+
+	int dfs(int u, int p) {
+		sub[u] = 1;
+
+		for (auto v : tree[u])
+			if (v != p) sub[u] += dfs(v, u);
+
+		return sub[u];
+	}
+
+	int dfs(int u, int p, int n) {
+		for (auto v : tree[u])
+			if (v != p and sub[v] > n/2) return dfs(v, u, n);
+
+		return u;
+	}
+
+	int operator[](int i) {
+		return dad[i];
+	}
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>centroid</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

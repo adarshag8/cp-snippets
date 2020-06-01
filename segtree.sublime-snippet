@@ -12,17 +12,25 @@ struct SegTree
     vector<data> st;
     vector<bool> cLazy;
     vector<int> lazy;
-    void init(int a, bool f=1)
+    void init(int a, int f=-1)
     {
         n = a;
-       	data temp;
-       	temp.mn = 0;
-       	temp.sum = 0;
-       	temp.mx = 0;
-        if(f) st.assign(4 * n + 5, data());
-        else st.assign(4*n+5, temp);
+        if(f!=-1){
+		st.resize(4 * n + 5);
+		build(1, 0, n, f);
+	}
+        else st.assign(4 * n + 5, data());
         cLazy.assign(4 * n + 5, false);
         lazy.assign(4 * n + 5, 0);
+    }
+    void build(int node, int tl, int tr, int v){
+    	st[node].mn = v;
+    	st[node].mx = v;
+    	st[node].sum = (tl-tr+1)*v;
+    	if(tl == tr) return;
+    	int mid = (tl+tr)/2;
+    	build(node*2, tl, mid, v);
+    	build(node*2+1, mid+1, tr, v);
     }
     void merge(data &cur, data &l, data &r) 
     {
