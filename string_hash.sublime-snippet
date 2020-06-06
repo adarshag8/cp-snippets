@@ -1,19 +1,66 @@
 <snippet>
 	<content><![CDATA[
-long long compute_hash(string const& s) {
-    const int p = 31;
-    const int m = 1e9 + 9;
-    long long hash_value = 0;
-    long long p_pow = 1;
-    for (char c : s) {
-        hash_value = (hash_value + (c - 'a' + 1) * p_pow) % m;
-        p_pow = (p_pow * p) % m;
-    }
-    return hash_value;
+vector<int> M = {1000000009, 1000000021, 1000000033, 1000000087, 1000000093};
+vector<int> p = {29, 31, 29, 31, 29};
+vector<vector<int>> invpo;
+int power(int x, unsigned int y, unsigned int m)
+{
+    if (y == 0)
+        return 1;
+    int p = power(x, y/2, m) % m;
+    p = (p * 1ll * p) % m;
+    return (y%2 == 0)? p : (x * 1ll * p) % m;
 }
+void init(){
+	int r = p.size();
+	for(int j = 0; j < r; j++){
+		vector<int> temp(N+1);
+		temp[N] = power(power(p[j], N, M[j]), M[j]-2, M[j]);
+		for(int i = N-1; i >= 0; i--){
+			temp[i] = (temp[i+1] * 1ll * p[j]) % M[j];
+		}
+		invpo.push_back(temp);
+	}
+}
+struct Hash{
+	string s;
+	int no;
+	vector <vector <int> > hash;
+	Hash(){}
+	Hash(string t, int number): s(t), no(number) {
+		compute_hash();
+	}
+	void compute_hash(){
+		int n = s.size();
+		vector <int> curhash;
+		vector <int> p_pow;
+		for(int i = 0; i < no; i++){
+			curhash.push_back(0);
+			p_pow.push_back(1);
+		}
+		hash.push_back(curhash);
+		for(int i = 1; i <= n; i++){
+			for(int j = 0; j < no; j++){
+				curhash[j] = (curhash[j] + (s[i-1] - 'a' + 1) * 1ll * p_pow[j]) % M[j];
+			}
+			hash.push_back(curhash);
+			for(int j = 0; j < no; j++){
+				p_pow[j] = (p_pow[j] * 1ll * p[j]) % M[j];
+			}
+		}
+	}
+	vector <int> get_hash(int l, int r){
+		vector <int> ans = hash[r];
+		for(int j = 0; j < no; j++)
+			ans[j] = (ans[j] - hash[l-1][j] + M[j]) % M[j];
+		for(int j = 0; j < no; j++)
+			ans[j] = (ans[j] * 1ll * invpo[j][l-1]) % M[j];
+		return ans;
+	}
+};
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	 <tabTrigger>string hash</tabTrigger> -->
+	<tabTrigger>string_hash</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<!-- <scope>source.python</scope> -->
 </snippet>

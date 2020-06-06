@@ -17,6 +17,8 @@ using namespace std;
 #define r0 return 0;
 #define endl '\n'
 #define INF (int)1e15
+
+/* Debug Begins */ 
 # define trace(args...) { string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); \
   stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args); }
 string to_string(char c) { return "'" + string(1, c) + "'";}
@@ -38,8 +40,9 @@ template<typename T,typename... Args> void err(istream_iterator<string> it, T a,
 template<typename T> void kek(T ans) {cout << ans << endl; exit(0);}
 #define Lu(...) [&] (auto &&u) { return __VA_ARGS__; }
 #define Luv(...) [&] (auto &&u, auto &&v) { return __VA_ARGS__; }
+/***************************************************************/
 
-/************/
+
 
 signed main()
 {
