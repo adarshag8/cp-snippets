@@ -14,7 +14,7 @@ void seive()
 				prime[i] = false; 
 		} 
 	} 
-	for (int i=2; i<=N; i++)
+	for (int i=2; i<N; i++)
 		if (prime[i] == true)
 			p.pb(i);
 } 
