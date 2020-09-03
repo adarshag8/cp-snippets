@@ -5,8 +5,8 @@ int dfs(int i)
 {
 	if(vis[i]) return 0;
 	vis[i] = 1;
-	rep(j,0,sz(g[i]))
-		dfs(g[i][j]);
+	for(int j:g[i])
+		dfs(j);
 }
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
