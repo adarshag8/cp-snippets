@@ -24,7 +24,7 @@ inline void printint(int a)
     putchar_unlocked('\n');
 }
 ]]></content>
-	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet  -->
 	 <tabTrigger>fast i/o</tabTrigger> -->
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<!-- <scope>source.python</scope> -->
