@@ -5,11 +5,11 @@ inline void readint(int &a)
     register int c;
     a = 0;
     do
-    	c = getchar_unlocked();
+    	c = getchar();
     while(c < '0');
     do{
 	    a = (a << 1) + (a << 3) + c - '0';
-	    c = getchar_unlocked();
+	    c = getchar();
     } while(c >= '0');
 }
 inline void printint(int a)
@@ -20,8 +20,8 @@ inline void printint(int a)
     	s[++t] = a % 10 + '0';
     	a /= 10;
     } while(a > 0);
-    while(t >= 0) putchar_unlocked(s[t--]);
-    putchar_unlocked('\n');
+    while(t >= 0) putchar(s[t--]);
+    putchar('\n');
 }
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->

@@ -7,10 +7,14 @@
 	[
 		"Competitive Programming",
 		"CppFastOlympicCoding",
+		"Formatter",
 		"GetCode",
+		"JavaScript Enhancements",
+		"MarkdownTOC",
 		"Package Control",
 		"SnippetMaker",
 		"SnippetManager",
+		"Terminus",
 		"WakaTime"
 	]
 }

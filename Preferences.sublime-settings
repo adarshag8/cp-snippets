@@ -1,8 +1,9 @@
 {
 	"auto_complete": true,
-	"font_size": 19,
+	"font_size": 18,
 	"ignored_packages":
 	[
 		"Vintage"
-	]
+	],
+	"theme": "Default.sublime-theme"
 }

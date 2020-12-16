@@ -30,7 +30,27 @@ int lca(int u, int v){
 	}
 	return up[u][0];
 }
-
+int dist(int u, int v){
+    int l = lca(u, v);
+    int cur = u;
+    int ans = 0;
+    for(int i=20; i>=0; i--){
+        if(!is_ancestor(up[cur][i],l)){
+            cur = up[cur][i];
+            ans += 1<<i;
+        }
+    }
+    ans += (cur != l);
+    cur = v;
+    for(int i=20; i>=0; i--){
+        if(!is_ancestor(up[cur][i],l)){
+            cur = up[cur][i];
+            ans += 1<<i;
+        }
+    }
+    ans += (cur != l);
+    return ans;
+}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>lca</tabTrigger> -->

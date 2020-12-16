@@ -1,3 +1,8 @@
 [
-	{ "keys": ["ctrl+alt+n"], "command": "new_snippet" }
+	{ "keys": ["ctrl+alt+n"], "command": "new_snippet" },
+	{
+        "keys": ["ctrl+alt+o"], "command": "terminus_open", "args": {
+            "cwd": "${file_path:${folder}}"
+        }
+    }
 ]

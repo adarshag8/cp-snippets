@@ -26,13 +26,13 @@ struct SegTree
     void build(int node, int tl, int tr, int v){
     	st[node].mn = v;
     	st[node].mx = v;
-    	st[node].sum = (tl-tr+1)*v;
+    	st[node].sum = (tr-tl+1)*v;
     	if(tl == tr) return;
     	int mid = (tl+tr)/2;
     	build(node*2, tl, mid, v);
     	build(node*2+1, mid+1, tr, v);
     }
-    void merge(data &cur, data &l, data &r) 
+    void merge(data &cur, data &l, data &r, int l1, int l2) 
     {
         cur.mn = min(l.mn, r.mn);
         cur.mx = max(l.mx, r.mx);
@@ -65,7 +65,7 @@ struct SegTree
         data left=Query(node*2, tl, mid, i, j);
         data right=Query(node*2 + 1, mid + 1, tr, i, j);
         data cur;
-        merge(cur, left, right);
+	    merge(cur, left, right, mid - tl + 1, tr - mid);
         return cur;
     } 
     void Update(int node, int tl, int tr, int i, int j, int val)
@@ -85,9 +85,10 @@ struct SegTree
         int mid = (tl + tr)/2;
         Update(node*2, tl, mid, i, j, val);
         Update(node*2 + 1, mid + 1, tr, i, j, val);
-        merge(st[node], st[node*2], st[node*2 + 1]);
+	    merge(st[node], st[node*2], st[node*2 + 1], mid - tl + 1, tr - mid);
     }
     int get_first(int node, int tl, int tr, int val){
+        if(tl == tr) return tl;
     	if(st[node].mn>val) return -1;
     	int mid = (tl+tr)/2;
     	if(st[2*node].mn<=val) return get_first(2*node, tl, mid, val);
